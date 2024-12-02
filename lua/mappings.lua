@@ -222,7 +222,7 @@ keymap.set("i", "<C-E>", "<END>")
 keymap.set("c", "<C-A>", "<HOME>")
 
 -- Delete the character to the right of the cursor
-keymap.set("i", "<C-D>", "<DEL>")
+keymap.set("i", "<leader>BS", "<DEL>")
 
 keymap.set("n", "<leader>cb", function()
   local cnt = 0
@@ -249,3 +249,8 @@ keymap.set("n", "<leader>cb", function()
     end)
   )
 end, { desc = "show cursor" })
+
+vim.g.expandtab = true
+vim.g.tabstop = 4
+vim.g.softtabstop = 4
+vim.g.shiftwidth = 4

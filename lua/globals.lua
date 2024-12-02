@@ -68,3 +68,9 @@ vim.g.loaded_matchparen = 1
 
 -- Disable sql omni completion, it is broken.
 vim.g.loaded_sql_completion = 1
+
+-- Use spaces instead of tabs
+vim.g.expandtab = true
+vim.g.tabstop = 4
+vim.g.softtabstop = 4
+vim.g.shiftwidth = 4

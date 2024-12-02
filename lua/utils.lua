@@ -31,6 +31,13 @@ function M.may_create_dir(dir)
   end
 end
 
+--- Implement vertical split from buffer
+function VerticalSplitBuffer(buffer)
+  str = "vert belowright sb " .. buffer.fargs[1]
+  vim.cmd(str)
+end
+vim.api.nvim_create_user_command("Vbuffer", VerticalSplitBuffer, { nargs = 1 })
+
 --- Generate random integers in the range [Low, High], inclusive,
 --- adapted from https://stackoverflow.com/a/12739441/6064933
 --- @param low integer the lower value for this range

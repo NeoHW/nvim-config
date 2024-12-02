@@ -49,12 +49,13 @@ local plugin_specs = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = function()
-      if vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
+    -- enabled = function()
+    --   if vim.g.is_mac then
+    --     return true
+    --   end
+    --   return false
+    -- end,
+    enabled = true,
     event = "VeryLazy",
     build = ":TSUpdate",
     config = function()
@@ -544,14 +545,16 @@ local plugin_specs = {
       require("config.fidget-nvim")
     end,
   },
+
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {},
   },
+
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -562,6 +565,7 @@ local plugin_specs = {
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
+
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -569,6 +573,7 @@ local plugin_specs = {
       require("copilot").setup {}
     end,
   },
+
   {
     "smjonas/live-command.nvim",
     -- live-command supports semantic versioning via Git tags
@@ -579,6 +584,7 @@ local plugin_specs = {
     end,
     event = "VeryLazy",
   },
+
   {
     -- show hint for code actions, the user can also implement code actions themselves,
     -- see discussion here: https://github.com/neovim/neovim/issues/14869
@@ -587,8 +593,49 @@ local plugin_specs = {
       require("nvim-lightbulb").setup { autocmd = { enabled = true } }
     end,
   },
+
+  -- Skeleton files for different file formats
+  {
+      "cvigilv/esqueleto.nvim",
+      opts = {},
+      config = function()
+          require("esqueleto").setup(
+          {
+              patterns = { "LICENSE", "python"}
+          }
+          )
+      end,
+  },
+
+  {
+      "nvim-neotest/nvim-nio",
+  },
+
+  -- Better searching
+  {
+      "justinmk/vim-sneak",
+  },
+
+  {
+      "windwp/nvim-ts-autotag",
+        event = "VeryLazy",
+        build = ":TSUpdate",
+        config = function()
+        require("config.treesitter")
+        end,
+  },
+
+  {
+      "HiPhish/nvim-ts-rainbow2",
+        event = "VeryLazy",
+        build = ":TSUpdate",
+        config = function()
+        require("config.treesitter")
+        end,
+  },
 }
 
+-- configuration for lazy itself
 require("lazy").setup {
   spec = plugin_specs,
   ui = {
