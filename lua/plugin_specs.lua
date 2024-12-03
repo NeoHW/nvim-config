@@ -389,17 +389,17 @@ local plugin_specs = {
   { "godlygeek/tabular", cmd = { "Tabularize" } },
 
   -- Markdown previewing (only for Mac and Windows)
-  {
-    "iamcco/markdown-preview.nvim",
-    enabled = function()
-      if vim.g.is_win or vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
-    build = "cd app && npm install",
-    ft = { "markdown" },
-  },
+  --  {
+  --    "iamcco/markdown-preview.nvim",
+  --    enabled = function()
+  --      if vim.g.is_win or vim.g.is_mac then
+  --        return true
+  --      end
+  --      return false
+  --    end,
+  --    build = "cd app && npm install",
+  --    ft = { "markdown" },
+  --  },
 
   {
     "rhysd/vim-grammarous",
@@ -553,25 +553,25 @@ local plugin_specs = {
   },
 
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
-    -- See Commands section for default commands if you want to lazy load on them
-  },
-
-  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     config = function()
       require("copilot").setup {}
     end,
+  },
+
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
   },
 
   {
